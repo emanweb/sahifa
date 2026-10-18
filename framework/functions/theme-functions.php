@@ -46,6 +46,7 @@ function tie_setup() {
 	// Disable Updater and Verification
 	add_filter( 'Taqyeem/Updater/disable',      '__return_true' );
 	add_filter( 'Taqyeem/Verification/disable', '__return_true' );
+	add_filter( 'sahifa/Verification/disable',  '__return_true' );
 
 	// Disable the default bbpress breadcrumb
 	add_filter( 'bbp_no_breadcrumb', '__return_true' );
@@ -1596,7 +1597,7 @@ function tie_theme_register_required_plugins() {
 	$config = array(
 		'id'           => 'tie'.THEME_NAME,			// Unique ID for hashing notices for multiple instances of TGMPA.
 			'default_path' => '',						// Default absolute path to pre-packaged plugins.
-			'has_notices'  => true,						// Show admin notices or not.
+			'has_notices'  => false,						// Show admin notices or not.
 			'dismissable'  => true,						// If false, a user cannot dismiss the nag message.
 			'dismiss_msg'  => '',						// If 'dismissable' is false, this message will be output at top of nag.
 			'is_automatic' => false,					// Automatically activate plugins after installation or not.
@@ -2052,7 +2053,7 @@ if( ! function_exists( 'tie_article_schemas' ) ){
 	/**
 	 * License Validation message
 	 */
-	add_filter( 'wp_footer', 'sahifa_validation_message' );
+	// add_filter( 'wp_footer', 'sahifa_validation_message' ); // Disabled: front-end license notice
 	function sahifa_validation_message(){
 		
 		if( ! get_option( 'tie_token_'.SAHIFA_ID ) && ! empty( $_SERVER['SERVER_NAME'] ) && strpos(  $_SERVER['SERVER_NAME'], 'tielabs.com' ) === false ){
